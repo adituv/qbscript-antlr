@@ -42,17 +42,16 @@ literal : INT      # litInt
         | qbStruct # litStruct
         ;
 
-vec2 : '(' NUMBER ',' NUMBER ')';
-vec3 : '(' NUMBER ',' NUMBER ',' NUMBER ')';
+vec2 : '(' x=NUMBER ',' y=NUMBER ')';
+vec3 : '(' x=NUMBER ',' y=NUMBER ',' z=NUMBER ')';
 
 qbStruct : '{' qbStructItem+ '}';
-qbStructItem locals[string type]
-  : qbType {$type=$qbType.text;} qbKey '=' qbStructLit[type:$type] ';';
+qbStructItem : qbType qbKey '=' qbStructLit ';';
 qbType : 'int' | 'float' | 'string' | 'wstring' | 'vec2' | 'vec3' | 'struct'
        | 'array' '<' qbType '>' | 'qbkey' | 'qbkeyref' | 'stringptr'
        | 'qbkeystringqs';
 
-qbStructLit[string type]
+qbStructLit
        : INT                       # qbSSmallLit
        | FLOAT                     # qbSSmallLit
        | qbKey                     # qbSSmallLit
@@ -63,7 +62,7 @@ qbStructLit[string type]
        | qbStruct                  # qbSBigLit
        | qbStructArray[type:$type] # qbSArrayLit;
 
-qbStructArray[string type] : '[' (|qbStructLit[type:$type] (',' qbStructLit[type:$type])*) ']';
+qbStructArray : '[' (|qbStructLit (',' qbStructLit)*) ']';
 
 testLit : literal EOF;
 
