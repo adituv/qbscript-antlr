@@ -79,13 +79,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Language\CodeGen.cs" />
+    <Compile Include="Language\Generated\QbScriptBaseVisitor.cs" />
+    <Compile Include="Language\Generated\QbScriptLexer.cs" />
+    <Compile Include="Language\Generated\QbScriptParser.cs" />
+    <Compile Include="Language\Generated\QbScriptVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Grammars\QbScript.g4" />
+    <None Include="Language\Generated\QbScript.tokens" />
+    <None Include="Language\Generated\QbScriptLexer.tokens" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -100,12 +105,10 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Language\Generated\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>java -jar $(ProjectDir)extern_tools\antlr-4.6-complete.jar -o $(ProjectDir)language\generated -Dlanguage=CSharp -package QbScript.Language $(ProjectDir)grammars\QbScript.g4</PreBuildEvent>
+    <PreBuildEvent>java -jar $(ProjectDir)extern_tools\antlr-4.6-complete.jar -o $(ProjectDir)language\generated -Dlanguage=CSharp -package QbScript.Language -visitor -no-listener $(ProjectDir)grammars\QbScript.g4</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
