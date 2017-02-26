@@ -33,6 +33,12 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IQbScriptVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="QbScriptParser.number"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNumber([NotNull] QbScriptParser.NumberContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>QbKeyId</c>
 	/// labeled alternative in <see cref="QbScriptParser.qbKey"/>.
 	/// </summary>

@@ -79,10 +79,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Language\AST\IASTNode.cs" />
+    <Compile Include="Language\AST\Literal.cs" />
+    <Compile Include="Language\AST\LitFloat.cs" />
+    <Compile Include="Language\AST\LitVec3.cs" />
+    <Compile Include="Language\AST\LitVec2.cs" />
+    <Compile Include="Language\AST\LitWString.cs" />
+    <Compile Include="Language\AST\LitNString.cs" />
+    <Compile Include="Language\AST\LitQbKey.cs" />
+    <Compile Include="Language\AST\LitHex.cs" />
+    <Compile Include="Language\AST\LitInt.cs" />
     <Compile Include="Language\Generated\QbScriptBaseVisitor.cs" />
     <Compile Include="Language\Generated\QbScriptLexer.cs" />
     <Compile Include="Language\Generated\QbScriptParser.cs" />
     <Compile Include="Language\Generated\QbScriptVisitor.cs" />
+    <Compile Include="Language\QbScriptLiteralVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

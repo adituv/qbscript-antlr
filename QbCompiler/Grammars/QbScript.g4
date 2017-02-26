@@ -10,7 +10,7 @@ RWORD : 'if' | 'else' | 'elif' | 'elseif' | 'repeat' | 'switch' | 'case'
       | 'default' | 'goto_random' | 'script';
 
 fragment LETTER : [A-Za-z];
-DIGIT : [0-9];
+fragment DIGIT : [0-9];
 HEXINT : ('0X'|'0x') HEXDIGIT+;
 fragment HEXDIGIT : [0-9A-Fa-f]+;
 
@@ -24,7 +24,7 @@ WSTRING : '"' ('\"' | ~["\r\n])* '"';
 
 INT: ('+'|'-')? DIGIT+;
 FLOAT : ('+'|'-')? (DIGIT* DECIMAL EXPONENT? | DIGIT+ EXPONENT);
-NUMBER : INT | FLOAT;
+number : INT | FLOAT;
 
 qbKey : ID         # QbKeyId
       | CHECKSUM   # QbKeyCrc
@@ -42,8 +42,8 @@ literal : INT      # litInt
         | qbStruct # litStruct
         ;
 
-vec2 : '(' x=NUMBER ',' y=NUMBER ')';
-vec3 : '(' x=NUMBER ',' y=NUMBER ',' z=NUMBER ')';
+vec2 : '(' x=number ',' y=number ')';
+vec3 : '(' x=number ',' y=number ',' z=number ')';
 
 qbStruct : '{' qbStructItem+ '}';
 qbStructItem : qbType qbKey '=' qbStructLit ';';
@@ -52,15 +52,15 @@ qbType : 'int' | 'float' | 'string' | 'wstring' | 'vec2' | 'vec3' | 'struct'
        | 'qbkeystringqs';
 
 qbStructLit
-       : INT                       # qbSSmallLit
-       | FLOAT                     # qbSSmallLit
-       | qbKey                     # qbSSmallLit
-       | vec2                      # qbSFloatLit
-       | vec3                      # qbSFloatLit
-       | NSTRING                   # qbSBigLit
-       | WSTRING                   # qbSBigLit
-       | qbStruct                  # qbSBigLit
-       | qbStructArray[type:$type] # qbSArrayLit;
+       : INT           # qbSSmallLit
+       | FLOAT         # qbSSmallLit
+       | qbKey         # qbSSmallLit
+       | vec2          # qbSFloatLit
+       | vec3          # qbSFloatLit
+       | NSTRING       # qbSBigLit
+       | WSTRING       # qbSBigLit
+       | qbStruct      # qbSBigLit
+       | qbStructArray # qbSArrayLit;
 
 qbStructArray : '[' (|qbStructLit (',' qbStructLit)*) ']';
 
